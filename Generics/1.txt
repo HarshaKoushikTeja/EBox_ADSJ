@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+// Class Array with generic type T
+class Array<T extends Comparable<T>> {
+    private int size;
+    private T[] array;
+
+    // Constructor to initialize the size and array
+    public Array(int size) {
+        this.size = size;
+        this.array = (T[]) new Comparable[size];
+    }
+
+    // Function to set the array elements
+    public void setArray(int index, T value) {
+        array[index] = value;
+    }
+
+    // Function to find the minimum value in the array
+    public T min() {
+        T minValue = array[0];
+        for (int i = 1; i < size; i++) {
+            if (array[i].compareTo(minValue) < 0) {
+                minValue = array[i];
+            }
+        }
+        return minValue;
+    }
+
+    // Function to find the maximum value in the array
+    public T max() {
+        T maxValue = array[0];
+        for (int i = 1; i < size; i++) {
+            if (array[i].compareTo(maxValue) > 0) {
+                maxValue = array[i];
+            }
+        }
+        return maxValue;
+    }
+}
+
+// Driver class Main
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the size of the arrays
+        System.out.println("Enter the size of the arrays");
+        int size = scanner.nextInt();
+
+        // Initialize the Array object for Integer array
+        Array<Integer> intArray = new Array<>(size);
+        System.out.println("Enter the Integer value");
+        for (int i = 0; i < size; i++) {
+            intArray.setArray(i, scanner.nextInt());
+        }
+
+        // Initialize the Array object for Character array
+        Array<Character> charArray = new Array<>(size);
+        System.out.println("Enter the Characters");
+        for (int i = 0; i < size; i++) {
+            charArray.setArray(i, scanner.next().charAt(0));
+        }
+
+        // Initialize the Array object for Double array
+        Array<Double> doubleArray = new Array<>(size);
+        System.out.println("Enter the Double value");
+        for (int i = 0; i < size; i++) {
+            doubleArray.setArray(i, scanner.nextDouble());
+        }
+
+        // Print the maximum and minimum values for each array
+        System.out.println("Maximum value in an integer array: " + intArray.max());
+        System.out.println("Minimum value in an integer array: " + intArray.min());
+
+        System.out.println("Maximum value in character array: " + charArray.max());
+        System.out.println("Minimum value in character array: " + charArray.min());
+
+        System.out.println("Maximum value in double array: " + doubleArray.max());
+        System.out.println("Minimum value in double array: " + doubleArray.min());
+    }
+}
