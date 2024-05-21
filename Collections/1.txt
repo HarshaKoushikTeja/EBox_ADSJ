@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the number of address:");
+        int numAddresses = scanner.nextInt();
+        scanner.nextLine();
+
+        Map<String, Map<String, Integer>> stateCityAddressCount = new TreeMap<>();
+
+        for (int i = 0; i < numAddresses; i++) {
+            System.out.println("Enter the address:");
+            String address = scanner.nextLine();
+            String[] parts = address.split(",");
+            String state = parts[2];
+            String city = parts[1];
+
+            if (!stateCityAddressCount.containsKey(state)) 
+                stateCityAddressCount.put(state, new TreeMap<>());
+
+            Map<String, Integer> cityCount = stateCityAddressCount.get(state);
+            if (!cityCount.containsKey(city))
+                cityCount.put(city, 1);
+            else 
+                cityCount.put(city, cityCount.get(city) + 1);
+        }
+
+		System.out.println("Number of entries in city/state wise:");
+		
+        for (Map.Entry<String, Map<String, Integer>> stateEntry : stateCityAddressCount.entrySet()) {
+            String state = stateEntry.getKey();
+            System.out.println("State:" + state);
+            for (Map.Entry<String, Integer> cityEntry : stateEntry.getValue().entrySet()) {
+                String city = cityEntry.getKey();
+                int count = cityEntry.getValue();
+                System.out.println("City:" + city + " Count:" + count);
+            }
+            System.out.println();
+        }
+    }
+}
