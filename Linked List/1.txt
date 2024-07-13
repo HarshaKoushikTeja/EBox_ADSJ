@@ -1,0 +1,119 @@
+Main.java  :
+______________
+
+
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        LinkedList<Employee> employeeList = new LinkedList<>();
+
+        System.out.println("Enter The Number of Employees");
+        int numEmployees = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        for (int i = 1; i <= numEmployees; i++) {
+            System.out.println("Enter The " + i + " Employee Details:");
+            System.out.println("Enter the Firstname");
+            String firstName = scanner.nextLine();
+            System.out.println("Enter the Lastname ");
+            String lastName = scanner.nextLine();
+            System.out.println("Enter the Mobile");
+            String mobile = scanner.nextLine();
+            System.out.println("Enter the Email ");
+            String email = scanner.nextLine();
+            System.out.println("Enter the Address ");
+            String address = scanner.nextLine();
+
+            Employee employee = new Employee(firstName, lastName, mobile, email, address);
+            employeeList.add(employee);
+        }
+
+        Collections.sort(employeeList, Comparator.comparing(Employee::getFirstName));
+
+        System.out.println("Employee List:");
+        System.out.format("%-15s %-15s %-15s %-30s %-15s\n", "Firstname", "Lastname", "Mobile", "Email", "Address");
+
+        for (Employee employee : employeeList) {
+            System.out.format("%-15s %-15s %-15s %-30s %-15s\n",
+                    employee.getFirstName(), employee.getLastName(), employee.getMobile(), employee.getEmail(), employee.getAddress());
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Employee.java :
+___________________
+
+
+class Employee {
+    private String firstName;
+    private String lastName;
+    private String mobile;
+    private String email;
+    private String address;
+
+    public Employee(String firstName, String lastName, String mobile, String email, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mobile = mobile;
+        this.email = email;
+        this.address = address;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+}
